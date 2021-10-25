@@ -3,7 +3,9 @@
     {{> base-selector}}
     <h2>Select yuor favorites addons</h2>
     {{#each addons}}
+        {{#if (isNotInArray @root.cookie.addons this.[0])}}
         <a href="/configurator/add-addon/{{this.[0]}}">Select {{this.[0]}} for {{pricify this.[1]}} PLN</a>
+        {{/if}}
     {{/each}}  
 {{#if cookie.base}}    
     {{> cookie-preview}}
