@@ -1,5 +1,5 @@
 const express = require("express");
-const { COOKIE_ADDONS } = require("../data/cookies-data");
+const { COOKIE_ADDONS, COOKIE_BASES } = require("../data/cookies-data");
 const { errorRender } = require("../utils/error-render");
 const { getAddonsFromReq } = require("../utils/get-addons-from-req");
 
@@ -8,6 +8,11 @@ const configuratorRouter = express.Router();
 configuratorRouter
 .get("/select-base/:baseName", (req, res) => {
   const { baseName } = req.params;
+
+  if(!COOKIE_BASES[baseName]) {
+    return errorRender(res, `There is no such base as ${baseName}.`);
+  }
+
   res
     .cookie("cookieBase", baseName)
     .render("configurator/base-selected", { baseName });
@@ -16,15 +21,13 @@ configuratorRouter
   const { addonName } = req.params;
  
   if(!COOKIE_ADDONS[addonName]) {
-    errorRender(res, `There is no such addon as ${addonName}.`);
-    return;
+   return errorRender(res, `There is no such addon as ${addonName}.`);
   }
 
   const addons = getAddonsFromReq(req);
 
   if(addons.includes(addonName)) {
-    errorRender(res, `${addonName} addon is already on your cookie. You cannot add it twice.`);   
-    return;
+   return errorRender(res, `${addonName} addon is already on your cookie. You cannot add it twice.`);   
   }
 
   addons.push(addonName);
@@ -35,7 +38,14 @@ configuratorRouter
 .get('/delete-addon/:addonName', (req, res) => {
   const { addonName } = req.params;
  
-  const addons = getAddonsFromReq(req).filter(addon => addon !== addonName);
+  const oldAddons = getAddonsFromReq(req);
+
+  if(!oldAddons.includes(addonName)) {
+    return errorRender(res, `Cannot delet something that isn't already added to the cookie.
+    ${addonName} addon not found on cookie.`);
+  }
+
+  const addons = oldAddons.filter(addon => addon !== addonName);
  
   res.cookie('cookieAddons', JSON.stringify(addons))
   .render('configurator/addon-deleted', { addonName });

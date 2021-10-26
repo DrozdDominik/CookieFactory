@@ -8,3 +8,31 @@
   padding: 15px;
   background-color: #ffcdcd;
 }
+
+.btn {
+  display: inline-block;
+  background: #b0a797;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+  border: 1px solid #463412;
+  font-weight: bold;
+  margin: 3px;
+  border-radius: 3px;
+}
+
+.btn-disabled {
+  background: #585858;
+  color: white;
+  pointer-events: none;
+}
+
+.btn-small {
+  padding: 0 5px;
+  margin: 0;
+}
+
+.btn-big {
+  font-size: 110%;
+  padding: 10px 20px;
+}
