@@ -7,7 +7,7 @@
     {{/each}}  
 {{#if cookie.base}}    
     {{> cookie-preview}}
-    {{> addons}}
+    {{> addons deleteBtn=true}}
     <a href="/order/summary" class="btn btn-big">Order now!</a>
 {{else}}
     <p><strong>Please select base of your cookie to see it's preview and price summary</strong></p>
