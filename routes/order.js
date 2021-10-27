@@ -9,15 +9,15 @@ const orderRouter = express.Router();
 orderRouter
 .get('/summary', (req, res) => {
 
-  const {sum, addons, cookieBase, allAddons, allBases} = getCookieSettings(req);
+  const {sum, addons, base, allAddons, allBases} = getCookieSettings(req);
 
     res.render('order/summary', {
       cookie: {
-        base: cookieBase,
+        base,
         addons,
       },
-      bases: allBases,
-      addons: allAddons,
+      allBases,
+      allAddons,
       sum,
     })
 })
@@ -28,7 +28,7 @@ orderRouter
     res
     .clearCookie('cookieBase')
     .clearCookie('cookieAddons')
-    .render('/order/thanks', {
+    .render('order/thanks', {
       sum,
     })
 })

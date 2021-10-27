@@ -2,7 +2,7 @@
 <h2>Select cookie base</h2>
     {{> base-selector}}
     <h2>Select yuor favorites addons</h2>
-    {{#each addons}}        
+    {{#each allAddons}}        
         <a href="/configurator/add-addon/{{this.[0]}}" class="btn {{#if (isInArray @root.cookie.addons this.[0])}}btn-disabled{{/if}}">Select {{this.[0]}} for {{pricify this.[1]}} PLN</a>        
     {{/each}}  
 {{#if cookie.base}}    

@@ -3,14 +3,14 @@
   <li>Base:
     {{cookie.base}}
     -
-    {{pricify (find-price bases cookie.base)}}
+    {{pricify (find-price allBases cookie.base)}}
     PLN</li>
   {{#each cookie.addons}}  
     <li>            
       {{#if ../deleteBtn}}
         <a href="/configurator/delete-addon/{{this}}" class="btn btn-small">Delete</a>
       {{/if}}
-      Addon: {{this}} - {{pricify (find-price @root.addons this)}} PLN</li>
+      Addon: {{this}} - {{pricify (find-price @root.allAddons this)}} PLN</li>
   {{/each}}
 </ul>
 <p>

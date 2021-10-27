@@ -4,7 +4,7 @@ const { handlebarsHelpers } = require("../utils/handlebars-helpers");
 
 const getCookieSettings = req => {
 
-    const { cookieBase } = req.cookies;
+    const { cookieBase: base } = req.cookies;
   
     const addons = getAddonsFromReq(req);
 
@@ -13,10 +13,10 @@ const getCookieSettings = req => {
 
   
     const sum =
-      (cookieBase
+      (base
         ? handlebarsHelpers["find-price"](
             allBases,
-            cookieBase
+            base
           )
         : 0) +
       addons.reduce(
@@ -27,7 +27,7 @@ const getCookieSettings = req => {
       );
 
       return {
-        cookieBase,  
+        base,  
         addons,
         sum,
         allBases,
