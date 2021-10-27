@@ -9,6 +9,12 @@
   background-color: #ffcdcd;
 }
 
+.success {
+  border: 1px solid green;
+  padding: 15px;
+  background-color: #5be3b5;
+}
+
 .btn {
   display: inline-block;
   background: #b0a797;
